@@ -1,0 +1,23 @@
+{% extends "core/base.html" %} {% block title %}Log In{% endblock title %}
+{% block body %}
+<div class="container">
+  <h2 class="text-center d-block">Login Page</h2>
+  <form action="{% url 'login' %}" method="post" class="w-100 mx-auto">
+    {% csrf_token %}
+    <div class="form-group mb-4">
+      <label for="login-email" class="text-muted">Email</label>
+      <input type="login-email" class="form-control border-none" id="login-email" name="login-email"
+        aria-describedby="Email">
+      <!--small id="usernameHelp" class="form-text text-danger">Too small number of characters</small>-->
+    </div>
+    <div class="form-group mb-4">
+      <label for="login-password" class="text-muted">Password</label>
+      <input type="password" class="form-control" name="login-password" id="login-password">
+    </div>
+    <div class="form-row align-items-baseline mt-1">
+      <button type="submit" class="btn btn-primary">Sign In</button>
+      <a href="#" id="noReg" class="ml-auto">Not Registered?</a>
+    </div>
+  </form>
+</div>
+{% endblock body %}

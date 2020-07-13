@@ -1,0 +1,103 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- Optimized viewport for mobile -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+  <!-- Website Description -->
+  <meta name="description" content="Jbritz MailAPI, technology" />
+  <meta name="keywords" content="" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+
+  <!-- Website title-->
+  <title>{% block title%}{% endblock title%} | MailAPI</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        MailAPI
+      </a>
+      <span class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mynav"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span></span>
+
+      <div class="collapse navbar-collapse" id="mynav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mr-0 mr-md-2">
+            <a class="nav-link menu-item-1" href="{% url 'home' %}">Home</a>
+          </li>
+          <li class="nav-item mr-0 mr-md-2">
+            {% if request.user.is_authenticated %}
+            <a class="nav-link menu-item-1" href="{% url 'logout' %}">Logout</a>
+
+            {% else %}
+            <a class="nav-link menu-item-2" href="{% url 'login' %}">Log In</a>
+            {% endif %}
+
+          </li>
+          {% if request.user.is_authenticated %}
+          <li class="nav-item mr-0 mr-md-2">
+            <a class="nav-link menu-item-2 active" href="#">Hello, <span
+                class="text-capitalize">{{request.user.username}}</span>👋🏽</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  {% block body %} {% endblock body %}
+  <div class="w-100 text-right text-muted py-3 pr-1 copyright" style="font-size: 0.75rem;">
+    <hr class="d-inline-block w-50 mr-2" style="vertical-align: middle;" />
+    Developed by
+    <a target="_blank" href="http://thepuredev.net" class="my-name">Ajibola Ojo</a>
+  </div>
+  {% block extrascripts %}{% endblock extrascripts %}
+  <style>
+    code {
+      background-color: rgba(0, 0, 0, 0.1);
+      border: 2px, solid black;
+      padding: 2px 5px;
+    }
+
+    .display-5 {
+      font-size: 3rem;
+    }
+
+    .my-name {
+      border-bottom: 2px dotted;
+      color: #575a89;
+    }
+
+    .my-name:hover {
+      color: purple;
+      text-decoration: none;
+    }
+  </style>
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  {% if alert %}
+  <script>
+    Swal.fire({
+      icon: '{{alert.icon}}',
+      title: 'Oops...',
+      text: '{{alert.message}}',
+      footer: '<a href>Please reach me if there are any issues</a>'
+    })
+  </script>
+
+  {% endif %}
+
+</body>
+
+</html>

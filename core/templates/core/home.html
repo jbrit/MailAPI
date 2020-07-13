@@ -1,0 +1,71 @@
+{% extends "core/base.html" %} {% block title %}Home{% endblock title %}
+{% block body %}
+<div class="container">
+    <h2 class="text-center d-block mb-2">How to Use</h2>
+    <ul>
+        <li>Login/Reach me on slack to register <code>@jbritz</code></li>
+        <li><b>You have to be authenticated to make successful requests</b></li>
+        <li>Make a GET request to
+            <br>
+            <code>api/emails/</code>
+            <br>
+            To get the email list. <br>
+            A successful request returns something like this:
+            <code class="d-block p-3">
+                [<br>
+                {<br>
+                    "id": 1,<br>
+                    "email": "070504249272@eefsrgd.khjbv"<br>
+                },<br>
+                {<br>
+                    "id": 2,<br>
+                    "email": "new070504249272@eefsrgd.khjbv"<br>
+                },<br>
+                {<br>
+                    "id": 3,<br>
+                    "email": "11070504249272@eefsrgd.khjbv"<br>
+                },<br>
+                {<br>
+                    "id": 4,<br>
+                    "email": "new070504249272@eefsrgd.khjbv"<br>
+                },<br>
+                {<br>
+                    "id": 6,<br>
+                    "email": "newer070504249272@eefsrgd.khjbv"<br>
+                }<br>
+                ]<br>
+            </code>
+        </li>
+        <li>Make a POST request to
+            <br>
+            <code>api/emails/</code>
+            <br>
+            To add to the email list
+            <ul>
+                <li>The required parameter here is <code>email</code></li>
+                <li>A successful request here returns something like</li>
+                <code class="d-block">
+                    {"email": "newer070504249272@eefsrgd.khjbv"}
+                </code>
+            </ul>
+        </li>
+        <li>Make a DELETE request to
+            <br>
+            <code>api/emails/{number}</code>
+            <br>
+            Where <code>number</code> is the id of the email to be deleted. <br>
+            A successful request here returns nothing, you can always GET the list to be sure only what is needed is
+            present
+        </li>
+        <li>That's all 😀</li>
+        {% if not request.user.is_authenticated %}
+        <li>Once You're authenticated, your Authorization Token Shows here!</li>
+        {% else %}
+        <li>
+            Use this as a part of the header for your request:
+            <code>Authorization: Token {{token}}</code>
+        </li>
+        {% endif %}
+    </ul>
+</div>
+{% endblock body %}
